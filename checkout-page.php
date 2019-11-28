@@ -87,54 +87,7 @@ if (!isset($_SESSION['user_id'])) {
               <!--address-->
 
 
-              <!--Grid row-->
-              <div class="row">
-
-                <!--Grid column-->
-                <div class="col-lg-4 col-md-12 mb-4">
-
-                  <label for="country">Country</label>
-                  <select class="custom-select d-block w-100" id="country" name='country'required>
-                    <option value="">Choose...</option>
-                    <option value="United States">United States</option>
-                  </select>
-                  <div class="invalid-feedback">
-                    Please select a valid country.
-                  </div>
-
-                </div>
-                <!--Grid column-->
-
-                <!--Grid column-->
-                <div class="col-lg-4 col-md-6 mb-4">
-
-                  <label for="state">State</label>
-                  <select class="custom-select d-block w-100" id="state" name="state" required>
-                    <option value="">Choose...</option>
-                    <option value="California">California</option>
-                  </select>
-                  <div class="invalid-feedback">
-                    Please provide a valid state.
-                  </div>
-
-                </div>
-                <!--Grid column-->
-
-                <!--Grid column-->
-                <div class="col-lg-4 col-md-6 mb-4">
-
-                  <label for="zip">Zip</label>
-                  <input type="text" class="form-control" id="zip" placeholder="" name='zip'value="zip" required>
-                  <div class="invalid-feedback">
-                    Zip code required.
-                  </div>
-
-                </div>
-                <!--Grid column-->
-
-              </div>
-              <!--Grid row-->
-
+            
               <hr>
 
 
@@ -199,7 +152,7 @@ if (!isset($_SESSION['user_id'])) {
             <span class="text-muted">Your cart</span>
             <span class="badge badge-secondary badge-pill"><?php
 if(isset($_SESSION['cart'])){
-            $c=new Cart(); echo $c->toal_item();
+            $c=new Cart('cart'); echo $c->toal_item();
 }else {
   echo 0;
 }
@@ -235,14 +188,13 @@ if(isset($_SESSION['cart'])){
             <li class="list-group-item d-flex justify-content-between">
               <span>Total (USD)</span>
               <strong>$ <?php
-if(isset($_SESSION['cart'])){
+              if(isset($_SESSION['cart'])){
               echo $c->get_total_price();
             }?> </strong>
             </li>
           </ul>
           <a href="./cart_edit.php">
             <span class="badge badge-secondary badge-pill">edit</span>
-
           </a>
 
           <!-- Cart -->

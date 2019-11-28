@@ -83,13 +83,13 @@ $data=fatch_data($sql);
 
             <p><?php echo $data[0]["description"] ?></p>
 
-            <form class="d-flex justify-content-left" action="./addTo_cart.php" method="post">
+            <form class="d-flex justify-content-left" action="./stock_up_cart.php" method="post">
               <!-- Default input -->
               <input type="quantity" min="0" name='quantity' value="1" aria-label="Search" class="form-control" style="width: 100px" oninput="validity.valid||(value='');" >
               <input type="number" name="id" value=<?php echo $data[0]["id"]; ?> hidden >
               <input type="number" name="price" value=<?php echo $data[0]["price"]; ?> hidden >
               <input type="text" name="name" value='<?php echo $data[0]["name"]; ?>' hidden >
-              <button class="btn btn-primary btn-md my-0 p" type="submit" name='update' value="false">Add to cart
+              <button class="btn btn-primary btn-md my-0 p" type="submit" name='update' value="false">Stack up
                 <i class="fas fa-shopping-cart ml-1"></i>
               </button>
 

@@ -1,6 +1,10 @@
 <!-- Navbar -->
 <?php require 'cart.php';
 // session_start();
+ function total_item_in($value)
+{
+if(isset($_SESSION[$value])){$c=new Cart($value); return $c->toal_item();}else{return "xx";}
+}
 ?>
 <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
   <div class="container">
@@ -35,7 +39,7 @@
             >Log in</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link waves-effect" href="https://mdbootstrap.com/education/bootstrap/" target="_blank">
+          <a class="nav-link waves-effect" href="./home.php" target="_blank">
             <?php
             if(isset($_SESSION['user_id'])){
               echo $_SESSION['first_name'];
@@ -45,24 +49,38 @@
              ?>
           </a>
         </li>
+        <?php
+        if(isset($_SESSION['is_staff'])){
+          if($_SESSION['is_staff']){
+            echo '<li class="nav-item">
+              <a class="nav-link waves-effect" href="./restock.php"
+                >ReStock</a>
+            </li>';
+            echo total_item_in('stock');
+          }
+        }
+
+
+         ?>
+
       </ul>
 
       <!-- Right -->
       <ul class="navbar-nav nav-flex-icons">
         <li class="nav-item">
           <a class="nav-link waves-effect" href="./checkout-page.php">
-            <span class="badge red z-depth-1 mr-1"> <?php if(isset($_SESSION['cart'])){$c=new Cart(); echo $c->toal_item();}else{echo "xx";} ?> </span>
+            <span class="badge red z-depth-1 mr-1"> <?php echo total_item_in('cart'); ?> </span>
             <i class="fas fa-shopping-cart"></i>
             <span class="clearfix d-none d-sm-inline-block"> Cart </span>
           </a>
         </li>
         <li class="nav-item">
-          <a href="https://www.facebook.com/mdbootstrap" class="nav-link waves-effect" target="_blank">
+          <a href="#" class="nav-link waves-effect" target="_blank">
             <i class="fab fa-facebook-f"></i>
           </a>
         </li>
         <li class="nav-item">
-          <a href="https://twitter.com/MDBootstrap" class="nav-link waves-effect" target="_blank">
+          <a href="#" class="nav-link waves-effect" target="_blank">
             <i class="fab fa-twitter"></i>
           </a>
         </li>

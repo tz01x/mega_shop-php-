@@ -29,7 +29,7 @@ function fatch_data($sql) {
 function login($email,$password){
 	//encript password to md5
 	$password = md5($password);
-	$sql = "SELECT * FROM user WHERE email='$email' AND password='$password' LIMIT 1";
+	$sql = "SELECT * FROM user natural join  profle WHERE email='$email' AND password='$password'   LIMIT 1";
 	$data = fatch_data($sql);
 	if($data){
 		//fill the result to session variable

@@ -3,6 +3,9 @@
 session_start();
 // require 'config/database.php';
 require 'cart.php';
+require 'config/h.php';
+confirm_logged_in();
+confirm_user_is_stuff_or_suberuser();
 $update=isset($_POST['update'])?$_POST['update']:'';
 $quantity=isset($_POST['quantity'])?$_POST['quantity']:'';
 $product_id=isset($_POST['id'])?$_POST['id']:'';
@@ -11,14 +14,14 @@ $name=isset($_POST['name'])?$_POST['name']:'';
 
 if($_SERVER['REQUEST_METHOD']=='POST' && is_array($_POST) && !empty($update) && !empty($quantity)
     && !empty($product_id)&& !empty($product_price)&& !empty($name)){
-$success_location='./index.php';
-if($update=='true'){
-  $success_location='./cart_edit.php';
+      $success_location='./restock.php';
+      if($update=='true'){
+        $success_location='./stock_edit.php';
 
-}
-  if(isset($_SESSION['cart'])){
+      }
+  if(isset($_SESSION['stock'])){
     // echo $update,'  ', $quantity;
-    $cart=new Cart('cart');
+    $cart=new Cart('stock');
     $cart->add_to_cart($update,
     $quantity,
     $product_id,
@@ -28,14 +31,14 @@ if($update=='true'){
   }else{
 
     // $obj = array('' => , );
-    $_SESSION['cart']=array();
-    $cart=new Cart('cart');
+    $_SESSION['stock']=array();
+    $cart=new Cart('stock');
     $cart->add_to_cart($update,
     $quantity,
     $product_id,
     $product_price,
     $name,$success_location);
-    echo "33ok";
+
 
 
   }

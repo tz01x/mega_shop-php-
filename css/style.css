@@ -24,3 +24,8 @@ body,
 .mtg_t{
 margin-top:81px;
 }
+.mg_lr{
+  flex-wrap: wrap;
+      margin-right: 29px !important;
+      margin-left: 37px !important;
+}

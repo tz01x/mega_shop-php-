@@ -40,11 +40,7 @@ $first_name=isset($_POST['first_name'])?$_POST['first_name']:'';
 $last_name=isset($_POST['last_name'])?$_POST['last_name']:'';
 $username=isset($_POST['username'])?$_POST['username']:'';
 $email=isset($_POST['email'])?$_POST['email']:'';
-$state=isset($_POST['state'])?$_POST['state']:'';
-$country=isset($_POST['country'])?$_POST['country']:'';
-$zip=isset($_POST['zip'])?$_POST['zip']:'';
 $paymentMethod=isset($_POST['paymentMethod'])?$_POST['paymentMethod']:'';
-$zip=isset($_POST['zip'])?$_POST['zip']:'';
 $card_num=isset($_POST['card_num'])?$_POST['card_num']:'';
 $card_expiration=isset($_POST['card_expiration'])?$_POST['card_expiration']:'';
 $card_cvv=isset($_POST['card_cvv'])?$_POST['card_cvv']:'';
@@ -53,21 +49,21 @@ $card_cvv=isset($_POST['card_cvv'])?$_POST['card_cvv']:'';
 if($_SERVER['REQUEST_METHOD']=='POST' && is_array($_POST)
     && !empty($first_name) && !empty($last_name)
     && !empty($username)&& !empty($email)
-    && !empty($state)&& !empty($country)
-    && !empty($zip)&& !empty($paymentMethod)
-    && !empty($zip)&& !empty($card_num)
+
+    && !empty($paymentMethod)
+    && !empty($card_num)
     && !empty($card_expiration)&& !empty($card_cvv)
   ){
-$c=new Cart();
+$c=new Cart('cart');
 $c->calcu_for_each_product_total_price();
-$sql='INSERT INTO `orders` ( `user_id`) VALUES ('.$_SESSION['user_id'].')';
+$sql='INSERT INTO `orders` ( `user_id`,`total_amount`) VALUES ('.$_SESSION['user_id'].','.$c->get_total_price().')';
 $order_id=insert_data($sql);
 echo "order id :",$order_id;
 // $payment_sql='insert into payment(orserid,user_id,paymentMethod,card_num,card_expiration,card_cvv,total_amount) values ('.$order_id.','.$_SESSION['user_id'].','.$paymentMethod.','.$card_num.','.$card_expiration.','.$card_cvv.','.$c->get_total_price().')';
 $P_SQL='
 INSERT INTO `payment` ( `user_id`, `card_num`,
  `card_expiration`, `card_cvv`, `total_amount`,
-  `orserid`, `paymentMethod`)
+  `order_id`, `paymentMethod`)
   VALUES ('.$_SESSION['user_id'].', '.$card_num.', '.$card_expiration.', '.$card_cvv.', '.$c->get_total_price().', '.$order_id.', "'.$paymentMethod.'")
 ';
 $payment_id=insert_data($P_SQL);
