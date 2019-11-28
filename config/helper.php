@@ -57,7 +57,7 @@ function fetch_multiple($table,$field,$key,$value) {
  * | Fetch data with custom query
  * |-------------------------------------------------------
  */
-function fetch_custom($sql) {
+function fatch_data($sql) {
 	$result = $GLOBALS['conn']->query($sql);
 	if ($result->num_rows > 0) {
     	$data = mysqli_fetch_all($result,MYSQLI_ASSOC);
@@ -110,7 +110,7 @@ function check_brute($user_id) {
     $valid_attempts = $now - (30 * 60);
 
     $sql = "SELECT time FROM login_attempts WHERE user_id = $user_id AND time > '$valid_attempts'";
-    $data = fetch_custom($sql);
+    $data = fatch_data($sql);
     // If there have been more than 5 failed logins
 	if(count($data) > 5) {
         return TRUE;
@@ -128,7 +128,7 @@ function validate_user($email,$password){
 	//encript password to md5
 	$password = md5($password);
 	$sql = "SELECT * FROM user WHERE email='$email' AND password='$password' LIMIT 1";
-	$data = fetch_custom($sql);
+	$data = fatch_data($sql);
 	if($data){
 		//fill the result to session variable
 		$_SESSION['MEMBER_ID'] = $data[0]['id'];

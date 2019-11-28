@@ -5,8 +5,10 @@
 
 <body  style="background: #b6bac1">
   <?php
-  require("config/session.php");
-  include 'nav.php'
+  session_start();
+  
+  // require("config/session.php");
+  include 'nav.php';
 
   ?>
   <?php

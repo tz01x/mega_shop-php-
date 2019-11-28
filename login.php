@@ -1,5 +1,7 @@
 <?php
-require("config/session.php");
+// require("config/session.php");
+session_start();
+$error='';
 require("config/database.php");
 // require("config/helper.php");
 $email=isset($_POST['email'])?$_POST['email']:'';
@@ -15,7 +17,7 @@ $password=isset($_POST['password'])?$_POST['password']:'';
     return FALSE;
   }
 }
-function fetch_custom($sql) {
+function fatch_data($sql) {
 	$result = $GLOBALS['conn']->query($sql);
 	if ($result->num_rows > 0) {
     	$data = mysqli_fetch_all($result,MYSQLI_ASSOC);
@@ -24,28 +26,34 @@ function fetch_custom($sql) {
 		return FALSE;
 	}
 }
-function validate_user($email,$password){
+function login($email,$password){
 	//encript password to md5
 	$password = md5($password);
 	$sql = "SELECT * FROM user WHERE email='$email' AND password='$password' LIMIT 1";
-	$data = fetch_custom($sql);
+	$data = fatch_data($sql);
 	if($data){
 		//fill the result to session variable
 		$_SESSION['user_id'] = $data[0]['id'];
 		$_SESSION['first_name'] = $data[0]['first_name'];
-		$_SESSION['last_name'] = $data[0]['last_name'];
+    $_SESSION['last_name'] = $data[0]['last_name'];
+    $_SESSION['username'] = $data[0]['username'];
+    $_SESSION['email'] = $data[0]['email'];
+    $_SESSION['is_superuser'] = $data[0]['is_superuser'];
+    $_SESSION['is_staff'] = $data[0]['is_staff'];
+		$_SESSION['address'] = $data[0]['address'];
 		return TRUE;
 	}else{
 		return FALSE;
 	}
 }
 if($_SERVER['REQUEST_METHOD']==='POST' && is_array($_POST) && !empty($email) && !empty($password)){
-    $status = validate_user($email,$password);
+    $status = login($email,$password);
 	if($status){
 		header( "Location: home.php" ); die;
 	}else{
 
-		header( "Location: index.php" ); die;
+		// header( "Location: index.php" ); die;
+    $error='invalid info ';
 	}
 }
 // else{
@@ -95,12 +103,14 @@ if($_SERVER['REQUEST_METHOD']==='POST' && is_array($_POST) && !empty($email) && 
 
                                 <button type="submit" class="btn btn-success btn-lg float-right" id="btnLogin">Login</button>
                             </form>
+                            <?php echo $error; ?>
                         </div>
                         <!--/card-block-->
                     </div>
                     <!-- /form card login -->
 
                 </div>
+
 
 
             </div>

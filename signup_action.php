@@ -7,6 +7,7 @@
 $lname=$fname=$address=$pswd=$cpswd=$phone="";
 $alert_meg="";
 if(isset( $_POST['submit'])){
+
   $lname=$_POST['lname'];
     $username=$_POST['username'];
     $fname=$_POST['fname'];

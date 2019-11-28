@@ -1,4 +1,7 @@
 <!-- Navbar -->
+<?php require 'cart.php';
+// session_start();
+?>
 <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
   <div class="container">
 
@@ -33,7 +36,13 @@
         </li>
         <li class="nav-item">
           <a class="nav-link waves-effect" href="https://mdbootstrap.com/education/bootstrap/" target="_blank">
-            Profile
+            <?php
+            if(isset($_SESSION['user_id'])){
+              echo $_SESSION['first_name'];
+            }else{
+              echo "profile";
+            }
+             ?>
           </a>
         </li>
       </ul>
@@ -41,8 +50,8 @@
       <!-- Right -->
       <ul class="navbar-nav nav-flex-icons">
         <li class="nav-item">
-          <a class="nav-link waves-effect">
-            <span class="badge red z-depth-1 mr-1"> 1 </span>
+          <a class="nav-link waves-effect" href="./checkout-page.php">
+            <span class="badge red z-depth-1 mr-1"> <?php if(isset($_SESSION['cart'])){$c=new Cart(); echo $c->toal_item();}else{echo "xx";} ?> </span>
             <i class="fas fa-shopping-cart"></i>
             <span class="clearfix d-none d-sm-inline-block"> Cart </span>
           </a>
