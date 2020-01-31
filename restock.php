@@ -72,9 +72,7 @@
                        <!--Card content-->
                        <div class="card-body text-center">
                          <!--Category & Title-->
-                         <a href="./index.php?catagory='.$data['catagory_name'].'" class="grey-text">
-                           <h5>'.$data['catagory_name'].'</h5>
-                         </a>
+                        
                          <h5>
                            <strong>
                              <a href="./product_detail_stock.php?id='.$data['id'].' " class="dark-grey-text">'.$data['name'].'</a>

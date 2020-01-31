@@ -43,6 +43,7 @@ confirm_logged_in();
 		// require 'cart.php';
 		function fetch_custom($sql) {
 			$result = $GLOBALS['conn']->query($sql);
+    
 			if ($result->num_rows > 0) {
 					$data = mysqli_fetch_all($result,MYSQLI_ASSOC);
 					return $data;

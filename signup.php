@@ -6,7 +6,7 @@
 <body  style="background: #b6bac1">
   <?php
   session_start();
-  
+
   // require("config/session.php");
   include 'nav.php';
 
@@ -103,7 +103,7 @@
     </div>
 
 
-    <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+    <button type="submit" class="btn btn-primary" name="submit" value="oijfoji">Submit</button>
   </form>
 </div>
 </div>

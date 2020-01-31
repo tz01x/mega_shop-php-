@@ -33,5 +33,13 @@ function fetch_data($sql) {
     return  array( );
   }
 }
-
+function insert($sql){
+  $id='';
+  if ($GLOBALS['conn']->query($sql)==true) {
+    $id=$GLOBALS['conn']->insert_id;
+  }else{
+    echo $GLOBALS['conn']->error;
+  }
+	return $id;
+}
  ?>

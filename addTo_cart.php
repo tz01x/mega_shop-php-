@@ -9,7 +9,7 @@ $product_id=isset($_POST['id'])?$_POST['id']:'';
 $product_price=isset($_POST['price'])?$_POST['price']:'';
 $name=isset($_POST['name'])?$_POST['name']:'';
 
-if($_SERVER['REQUEST_METHOD']=='POST' && is_array($_POST) && !empty($update) && !empty($quantity)
+if(!empty($update) && !empty($quantity)
     && !empty($product_id)&& !empty($product_price)&& !empty($name)){
 $success_location='./index.php';
 if($update=='true'){

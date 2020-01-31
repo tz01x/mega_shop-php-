@@ -16,10 +16,6 @@
     if(empty($order_id)){
       header('Location: home.php ') ;die;
     }
-
-
-
-
      ?>
   </head>
   <body>

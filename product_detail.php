@@ -19,7 +19,7 @@ if($id==''){
   header( "Location: index.php" ); die;
 
 }
-$sql="SELECT * FROM products WHERE id=$id";
+$sql="SELECT products.id as id, products.name as name,price,description,img,quantity,catagory.name as catagory_name,c_name FROM products,catagory,supplier WHERE products.id=$id and catagory_id=catagory.id and supplier_id=supplier.id" ;
 $data=fatch_data($sql);
 // echo $data;
 ?>
@@ -46,7 +46,7 @@ $data=fatch_data($sql);
         <!--Grid column-->
         <div class="col-md-6 mb-4">
 
-          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/14.jpg" class="img-fluid" alt="">
+          <img src="<?php echo $data[0]["img"] ?>" class="img-fluid" alt="">
 
         </div>
         <!--Grid column-->

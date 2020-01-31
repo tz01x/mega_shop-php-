@@ -25,14 +25,15 @@
   $catagorys=isset($_GET['catagory'])?$_GET['catagory']:'';
   $q=isset($_GET['q'])?$_GET['q']:'';
 
-  $sql='select * from products where quantity>0 LIMIT 10';
+  $sql='select 	products.id as id,img,price,products.name as name ,catagory.name as catagory_name from products ,catagory  where quantity>0  and catagory_id=catagory.id  LIMIT 10';
+  // $sql='select 	products.id as id,img,price,products.name as name ,catagory.name as catagory_name,c_name from products ,catagory , supplier where quantity>0 and supplier_id=supplier.id and catagory_id=catagory.id  LIMIT 10';
 
   if ($catagorys !=''){
-    $sql='select * from products where catagory_name="'.$catagorys.'" and quantity>0 LIMIT 10';
+    $sql='select products.id as id,img,price,products.name as name ,catagory.name as catagory_name from products,catagory where catagory_id=catagory.id  and catagory.name="'.$catagorys.'" and quantity>0 LIMIT 10';
   }
   if($q!=''){
-    $sql='select * from products where name like "'.$q.'%" and quantity>0 LIMIT 10';
-
+    // $sql='select products.id as id,img,price,products.name as name ,catagory.name as catagory_name from products,catagory where products.name like "'.$q.'%" and quantity>0 and and catagory_id=catagory.id  LIMIT 10';
+$sql='select products.id as id,img,price,products.name as name ,catagory.name as catagory_name from products , catagory WHERE catagory_id=catagory.id and products.name like "'.$q.'%" and  quantity>0 limit 10  ' ;
   }
   // echo $sql;
   $datas=fetch_custom($sql);
@@ -111,8 +112,8 @@
                <div class="card">
 
                   <!--Card image-->
-                  <div class="view overlay">
-                    <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13.jpg" class="card-img-top"
+                  <div class="view overlay" >
+                    <img src='.$data['img'].' class="card-img-top cimgs"
                       alt="">
                     <a>
                       <div class="mask rgba-white-slight"></div>

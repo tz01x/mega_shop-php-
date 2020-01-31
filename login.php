@@ -6,17 +6,7 @@ require("config/database.php");
 // require("config/helper.php");
 $email=isset($_POST['email'])?$_POST['email']:'';
 $password=isset($_POST['password'])?$_POST['password']:'';
- function get_user_id($value='')
-{
-  $sql="select id form user where email='.$value.'";
-  $result= $GLOBALS['conn']->query($sql);
-  if ($result->num_rows > 0) {
-      $data = $result->fetch_assoc();
-      return $data;
-  }else{
-    return FALSE;
-  }
-}
+
 function fatch_data($sql) {
 	$result = $GLOBALS['conn']->query($sql);
 	if ($result->num_rows > 0) {
@@ -46,7 +36,7 @@ function login($email,$password){
 		return FALSE;
 	}
 }
-if($_SERVER['REQUEST_METHOD']==='POST' && is_array($_POST) && !empty($email) && !empty($password)){
+if($_SERVER['REQUEST_METHOD']==='POST' && !empty($email) && !empty($password)){
     $status = login($email,$password);
 	if($status){
 		header( "Location: home.php" ); die;

@@ -50,15 +50,23 @@ if(isset($_SESSION[$value])){$c=new Cart($value); return $c->toal_item();}else{r
           </a>
         </li>
         <?php
-        if(isset($_SESSION['is_staff'])){
-          if($_SESSION['is_staff']){
+        if(isset($_SESSION['is_staff']) || isset($_SESSION['is_superuser'])){
+
             echo '<li class="nav-item">
               <a class="nav-link waves-effect" href="./restock.php"
                 >ReStock</a>
             </li>';
             echo total_item_in('stock');
-          }
+
+
+            echo '<li class="nav-item">
+              <a class="nav-link waves-effect" href="./admin.php"
+                >admin</a>
+            </li>';
+
+
         }
+
 
 
          ?>
@@ -98,7 +106,7 @@ if(isset($_SESSION[$value])){$c=new Cart($value); return $c->toal_item();}else{r
           echo '<li class="nav-item">
             <a href="#" class="nav-link border border-light rounded waves-effect"
               target="_blank">
-              <i class="fab fa-github mr-2"></i> GitRipo
+              <i class="fab fa-github mr-2"></i> login Please
             </a>
           </li>';
         }
@@ -107,7 +115,7 @@ if(isset($_SESSION[$value])){$c=new Cart($value); return $c->toal_item();}else{r
          ?>
 
       </ul>
-
+<!--  -->
     </div>
 
   </div>

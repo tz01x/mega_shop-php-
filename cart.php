@@ -52,6 +52,7 @@ class Cart
         $temp_total=($this->get_quantity($key) * $this->get_price($key));
         $this->set_total($key,$temp_total);
     }
+
   }
   function get_total_price()
   {
